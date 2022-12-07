@@ -1,0 +1,131 @@
+/*
+  Copyright (c) 2019 Utah Department of Technology Services and Utah Department of Health
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+  In addition, this program is also subject to certain additional terms. You should
+  have received a copy of these additional terms immediately following the terms and
+  conditions of the GNU Affero General Public License which accompanied the program.
+  If not, please request a copy in writing from the Utah Department of Health at
+  the address below.
+
+  If you have questions concerning this license or the applicable additional terms,
+  you may contact us in writing at:
+  Utah Department of Health, P.O. Box 141010, Salt Lake City, UT 84114-1010 USA.
+*/
+fieldset.emsa-multiselect {
+    border: none;
+    padding: 0;
+    display: inline;
+    vertical-align: bottom;
+}
+
+fieldset.emsa-multiselect legend {
+    font-weight: 700;
+}
+
+fieldset.emsa-multiselect legend.emsa-ms-legend-left {
+    position: relative;
+    float: left;
+    line-height: 2.5;
+    font-weight: 400;
+}
+
+.multi-select, .multi-select-plugin {
+    display: inline-block;
+    position: relative;
+    min-width: 175px;
+    top: -1px;
+    background-color: white;
+    font-size: 1.1em;
+}
+
+.multi-select > span, .multi-select-plugin > span {
+    background: none;
+    position: relative;
+    padding: .32em 1.5em .32em .5em;
+    display: block;
+    border: solid 1px #bcbcbc;
+    cursor: default;
+    font-weight: 600;
+}
+
+.multi-select > span > .chevron, .multi-select-plugin > span > .chevron {
+    display: inline-block;
+    transform: rotate(-90deg) scale(1, 2) translate(-50%, 0);
+    font-weight: bold;
+    font-size: 0.85em;
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    line-height: 5px;
+}
+
+.multi-select > ul, .multi-select-plugin > ul {
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 100%;
+    min-width: 100%;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    display: none;
+    max-height: 320px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.multi-select > ul > li, .multi-select-plugin > ul > li {
+    white-space: nowrap;
+}
+
+.multi-select > ul > li.selected > label, .multi-select-plugin > ul > li.selected > label {
+    color: white;
+    background-color: #1651bf;
+    text-decoration: none;
+}
+
+.multi-select > ul > li.focused > label, .multi-select-plugin > ul > li.focused > label {
+    background-color: lightblue;
+    color: #333333;
+    text-decoration: underline;
+}
+
+.multi-select > ul > li > label, .multi-select-plugin > ul > li > label {
+    padding: .25em .5em;
+    display: block;
+}
+
+.multi-select > ul > li > label:focus, .multi-select > ul > li > label:hover, .multi-select-plugin > ul > li > label:focus, .multi-select-plugin > ul > li > label:hover {
+    background-color: lightblue;
+    color: #333333;
+    text-decoration: underline;
+}
+
+.multi-select.in > ul, .multi-select-plugin.in > ul {
+    display: block;
+}
+
+.multi-select-backdrop, .multi-select-plugin-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 900;
+}

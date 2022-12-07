@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emsa-ui
+  namespace: default
+  labels:
+    app.kubernetes.io/name: emsa-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: emsa-ui
+  template:
+    annotations:
+    metadata:
+      labels:
+        app.kubernetes.io/name: emsa-ui
+    strategy:
+      type: Recreate
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: EMSA_POSTGRES_DB
+            - name: emsaDbName
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: emsaDbName
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: EMSA_POSTGRES_PASSWORD
+            - name: emsaDbPass
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: emsaDbPass
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: EMSA_POSTGRES_USER
+            - name: emsaDbUser
+              valueFrom:
+                secretKeyRef:
+                  name: emsa-db-secrets
+                  key: emsaDbUser
+            - name: POSTGRES_HOST
+              value: emsa-db.default.svc.cluster.local
+            - name: emsaDbHost
+              value: 'emsa-db.default.svc.cluster.local'
+            - name: emsaDbPort
+              value: '5432'
+            - name: emsaDbSchemaPDO
+              value: 'elr'
+          image: emsa-ui
+          name: emsa-ui
+          imagePullPolicy: Always
+          ports:
+            - name: emsa-ui
+              containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

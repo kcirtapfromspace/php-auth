@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe5f9bb6c7232e297e07c6f8f006d72d",
+    "content-hash": "0b1b1ade56298b51ab9e3acacb7071bf",
     "packages": [
         {
             "name": "bramus/router",
@@ -448,6 +448,76 @@
             "time": "2022-12-02T10:28:21+00:00"
         },
         {
+            "name": "ory/kratos-client-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ory/kratos-client-php.git",
+                "reference": "07940fe32cd0eb17ad030b635682ce712ff09dd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ory/kratos-client-php/zipball/07940fe32cd0eb17ad030b635682ce712ff09dd5",
+                "reference": "07940fe32cd0eb17ad030b635682ce712ff09dd5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "^7.3",
+                "guzzlehttp/psr7": "^1.7 || ^2.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.12",
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ory\\Kratos\\Client\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ory GmbH",
+                    "homepage": "https://www.ory.sh"
+                }
+            ],
+            "description": "This is the API specification for Ory Identities with features such as registration, login, recovery, account verification, profile settings, password reset, identity management, session management, email and sms delivery, and more.",
+            "homepage": "https://github.com/ory/kratos-client-php",
+            "keywords": [
+                "api",
+                "openapi",
+                "openapi-generator",
+                "openapitools",
+                "php",
+                "rest",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/ory/kratos-client-php/issues",
+                "source": "https://github.com/ory/kratos-client-php/tree/v0.11.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/ory",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/_ory",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-12-02T18:50:46+00:00"
+        },
+        {
             "name": "ory/oathkeeper-client-php",
             "version": "dev-master",
             "source": {
@@ -723,16 +793,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.1.1",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918"
+                "reference": "1ee04c65529dea5d8744774d474e7cbd2f1206d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
-                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/1ee04c65529dea5d8744774d474e7cbd2f1206d3",
+                "reference": "1ee04c65529dea5d8744774d474e7cbd2f1206d3",
                 "shasum": ""
             },
             "require": {
@@ -741,7 +811,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1-dev"
+                    "dev-main": "3.3-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -770,7 +840,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.1.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -786,14 +856,15 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T11:15:52+00:00"
+            "time": "2022-11-25T10:21:52+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ory/oathkeeper-client-php": 20
+        "ory/oathkeeper-client-php": 20,
+        "ory/kratos-client-php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

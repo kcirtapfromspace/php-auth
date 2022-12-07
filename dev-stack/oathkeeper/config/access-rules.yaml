@@ -145,23 +145,22 @@
     - handler: redirect
       config:
         to: http://ory.test.info/panel/welcome
-
-# - 
-#   id: "ws:protected"
-#   upstream:
-#     preserve_host: true
-#     url: "http://php-ui:3001"
-#   match:
-#       url: "http://ory.test.info/panel<{php,**.css,**.js,**.png,**.svg}{/,}>"
-#   methods:
-#       - GET
-#   authenticators:
-#     - handler: cookie_session
-#   mutators:
-#     - handler: noop
-#   authorizer:
-#     handler: allow
-#   errors:
-#     - handler: redirect
-#       config:
-#         to: http://127.0.0.1:4455/login
+-
+  id: "ory:kratos-emsa-ui-node:anonymous"
+  upstream:
+    preserve_host: true
+    url: "http://emsa-ui:8000"
+  match:
+    url: "http://ory.test.info/elrapp/<**>"
+    methods:
+      - GET
+  authenticators:
+    - handler: anonymous
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: noop
+  errors:
+    - handler: redirect
+      config:
+        to: http://ory.test.info/elrapp/

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: emsa-ui
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: ory.test.info
+    http:
+      paths:
+      - path: /emsa/elrapp(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: emsa-ui
+            port:
+              number: 8000

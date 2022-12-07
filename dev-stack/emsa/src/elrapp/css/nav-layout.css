@@ -1,0 +1,232 @@
+/*
+  Copyright (c) 2016 Utah Department of Technology Services and Utah Department of Health
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+  In addition, this program is also subject to certain additional terms. You should
+  have received a copy of these additional terms immediately following the terms and
+  conditions of the GNU Affero General Public License which accompanied the program.
+  If not, please request a copy in writing from the Utah Department of Health at
+  the address below.
+
+  If you have questions concerning this license or the applicable additional terms,
+  you may contact us in writing at:
+  Utah Department of Health, P.O. Box 141010, Salt Lake City, UT 84114-1010 USA.
+*/
+
+/* IE11 hacks */
+@media all and (-ms-high-contrast:none) {
+    .menu_divider { float: none; }
+    main { display: block; }
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    font-size: 12px !important;
+    color: white;
+
+    /* Updated values pass WCAG AA & AAA for large and normal text */
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#8f0222+0,6d0019+100 */
+    background-color: rgb(143,2,34); /* Old browsers */
+    background-image: -moz-linear-gradient(top,  rgb(143,2,34) 0%, rgb(109,0,25) 100%); /* FF3.6-15 */
+    background-image: -webkit-linear-gradient(top,  rgb(143,2,34) 0%,rgb(109,0,25) 100%); /* Chrome10-25,Safari5.1-6 */
+    background-image: linear-gradient(to bottom,  rgb(143,2,34) 0%,rgb(109,0,25) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8f0222', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+
+    /*
+     * Previous values
+        background-color: #a90329;
+        background-color: rgba(169,3,41,1);
+        background-image: -moz-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+        background-image: -webkit-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+        background-image: -o-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+        background-image: -ms-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+        background-image: linear-gradient(to bottom, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=0 );
+    */
+
+    z-index: 9999;
+}
+
+header, nav, nav ul {
+    white-space: normal;
+    display: table;
+}
+
+header form#change_elr_view {
+    margin-right: 5px;
+    float: right;
+}
+
+nav {
+    padding-left: 3px;
+    float: left;
+}
+
+nav, .current {
+    margin: 0;
+    overflow: hidden;
+}
+
+nav ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul ul {
+    transition: all 0.2s ease 0.2s;
+    -webkit-transition: all 0.2s ease 0.2s;
+    background-color: rgba(0, 0, 0, .9);
+    width: 180px;
+    padding: 0;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 30px;
+}
+
+nav ul ul li {
+    display: block;
+    position: relative;
+}
+
+nav ul a, nav ul a:link, nav ul a:visited, .current, nav ul span.nav-folder {
+    color: white;
+    line-height: 30px;
+    padding: 5px;
+}
+
+nav ul ul a:link, nav ul ul a:visited, nav ul ul a:active, nav ul ul a:hover, nav ul ul span.nav-folder, nav ul ul span.nav-folder:hover {
+    display: block;
+    padding: 0 10px;
+    line-height: 25px;
+}
+
+nav ul a:hover, nav ul a:active, nav ul a:focus {
+    background-color: rgba(255, 255, 255, .9);
+    color: black;
+    text-decoration: underline;
+}
+
+nav ul a.current:hover, nav ul a.current:active, nav ul a.current:focus {
+    color: black !important;
+}
+
+nav ul ul a:hover, nav ul ul a:active, nav ul ul a:focus {
+    text-decoration: underline;
+    color: white;
+    background: #254779 url("../img/header-nav-bg.png") repeat-x scroll 0 0;
+}
+
+nav ul ul a.current:hover, nav ul ul a.current:active, nav ul ul a.current:focus {
+    color: greenyellow !important;
+}
+
+nav ul span.nav-folder:hover, nav ul span.nav-folder:focus {
+    background-color: rgba(255, 255, 255, .9);
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
+
+nav ul ul span.nav-folder:hover, nav ul ul span.nav-folder:focus {
+    text-decoration: none;
+    cursor: default;
+    color: white;
+    background: #254779 url("../img/header-nav-bg.png") repeat-x scroll 0 0;
+}
+
+nav * li ul { visibility: hidden; opacity: 0; }
+nav * li:hover > ul { visibility: visible; opacity: 1; position: absolute; }
+
+nav ul ul ul { top: 0; left: 180px; }
+
+main {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    padding-right: 20px;
+    color: #333333;
+    width: 100%;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.65+100 */
+    background-image: -moz-linear-gradient(left,  rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.15) 100%); /* FF3.6-15 */
+    background-image: -webkit-linear-gradient(left,  rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.15) 100%); /* Chrome10-25,Safari5.1-6 */
+    background-image: linear-gradient(to right,  rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 ); /* IE6-9 */
+
+}
+
+footer p {
+    font-size: 0.9em !important;
+    text-align: right;
+    color: #333333;
+    margin-top: 7px;
+}
+
+footer a {
+    text-decoration: underline;
+}
+
+#logo {
+    font-family: 'Oswald', Arial, Helvetica, sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 15pt !important;
+    cursor: default;
+}
+
+#logo, .menu_divider {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    float: right;
+    padding: 0 5px 0 0;
+    left: -5px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.5em;
+}
+
+#override_role {
+    border-color: dimgray;
+    background-color: lightcyan;
+    margin: 2px;
+}
+
+#override_role_submit span.ui-button-text {
+    padding: .15em 0.6em .15em 2.1em !important;
+}
+
+#override_role_submit {
+    top: -1px;
+}
+
+.menu_divider { padding: 0 5px; color: gainsboro; font-weight: 300; font-size: 22px; line-height: 1.3em; }
+.current { font-weight: bold; color: greenyellow !important; }
+.activetab { color: #000 !important; background-color: #FFF; }

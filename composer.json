@@ -2,6 +2,8 @@
     "require": {
       "ory/client": "^v1.0.2",
       "bramus/router": "^1.6",
-      "ory/oathkeeper-client-php": "*@dev"
+      "ory/oathkeeper-client-php": "*@dev",
+      "ory/kratos-client-php": "*@dev"
+
     }
   }

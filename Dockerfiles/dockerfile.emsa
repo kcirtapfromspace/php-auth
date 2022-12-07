@@ -1,0 +1,18 @@
+# FROM php:7.4-cli
+FROM php:8.1-apache
+RUN apt-get update && apt-get install -y \
+        libpq-dev \
+        && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+        && docker-php-ext-install pdo pdo_pgsql \
+        && touch /var/lib/elr_application.properties \
+        && mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/conf.d/php.ini \
+        # && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+        && echo 'ServerName localhost' >> /etc/apache2/sites-enabled/000-default.conf
+
+
+COPY ./dev-stack/emsa/src/elrapp/ /var/www/html/elrapp/
+COPY ./dev-stack/emsa/config/php/ /opt/emsa/
+WORKDIR /var/www/html/
+
+EXPOSE 80
+

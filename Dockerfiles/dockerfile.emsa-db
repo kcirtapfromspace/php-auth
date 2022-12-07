@@ -1,0 +1,4 @@
+FROM postgres:15
+# note initialization files will be executed in sorted name order as defined by the current locale, which defaults to en_US.utf8. 
+COPY ./dev-stack/emsa/config/sql/ /docker-entrypoint-initdb.d
+

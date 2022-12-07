@@ -5,6 +5,14 @@ resources:
   # Admin Ui 
   # - admin-ui/deployment.yaml
   # - admin-ui/service.yaml
+  #EMSA
+  - emsa/db_deployment.yaml
+  - emsa/db_secrets.yaml
+  - emsa/db_service.yaml
+  - emsa/deployment.yaml
+  - emsa/service.yaml
+  # - emsa/ingress.yaml
+
   # Kratos
   - kratos/deployment.yaml
   - kratos/service-admin.yaml
