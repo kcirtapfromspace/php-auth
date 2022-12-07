@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: oidc
+spec:
+  selector:
+    app: oidc
+  ports:
+  - name: oidc
+    port: 4444
+    targetPort: 4444
+    protocol: TCP
+  - name: oidc-admin
+    port: 4445
+    targetPort: 4445
+    protocol: TCP
+  - name: oidc-consent
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oidc
+  labels:
+    app: oidc
+spec:
+  hostname: oidc
+  containers:
+  - name: oidc-provider
+    image: oryd/hydra:latest
+    command: ["hydra", "serve", "-c", "/etc/config/hydra/hydra.yml", "all", "--dev"]
+    env:
+      - name: OAUTH2_EXPOSE_INTERNAL_ERRORS
+        value: "true"
+    volumeMounts:
+      - name: config
+        mountPath: "/etc/config/hydra/hydra.yml"
+        subPath: hydra.yaml
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    readinessProbe:
+      tcpSocket:
+        port: 4445
+      initialDelaySeconds: 10
+      periodSeconds: 10
+
+  - name: oidc-consent
+    image: oryd/hydra-login-consent-node:latest
+    env:
+      - name: HYDRA_ADMIN_URL
+        value: http://oidc.default.svc.cluster.local:4445
+      - name: MOCK_TLS_TERMINATION
+        value: "y"
+      - name: OAUTH2_EXPOSE_INTERNAL_ERRORS
+        value: "true"
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  volumes:
+    - name: config
+      configMap:
+        name: hydra-config

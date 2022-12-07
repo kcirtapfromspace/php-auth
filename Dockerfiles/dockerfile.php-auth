@@ -1,0 +1,19 @@
+FROM composer:2 as composer_stage
+
+RUN rm -rf /var/www && mkdir -p /var/www/html
+WORKDIR /var/www/html
+
+COPY composer.json  ./
+COPY composer.lock  ./
+RUN composer install --ignore-platform-reqs --prefer-dist --no-scripts --no-progress --no-interaction --no-dev --no-autoloader &&\
+        composer dump-autoload --optimize --apcu --no-dev
+
+FROM php:8.1-apache as php_stage
+
+WORKDIR /var/www/html/
+RUN apt-get update && apt-get install -y \
+        && echo 'ServerName localhost' >> /etc/apache2/sites-enabled/000-default.conf
+COPY src/ /var/www/html/
+COPY --from=composer_stage /var/www/html /var/www/html/
+ENV ServerName=localhost
+EXPOSE 80

@@ -1,0 +1,68 @@
+dsn: memory
+
+serve:
+  admin:
+    cors:
+      enabled: true
+      allowed_origins:
+        - https://localhost
+        - https://*.localhost
+      allowed_methods:
+        - POST
+        - GET
+        - PUT
+        - PATCH
+        - DELETE
+      allowed_headers:
+        - Authorization
+      exposed_headers:
+        - Content-Type
+  public:
+    cors:
+      enabled: true
+      allowed_origins:
+        - https://localhost
+        - https://*.localhost
+      allowed_methods:
+        - POST
+        - GET
+        - PUT
+        - PATCH
+        - DELETE
+      allowed_headers:
+        - Authorization
+      exposed_headers:
+        - Content-Type
+  cookies:
+    same_site_mode: Lax
+
+log:
+  level: trace
+  format: json
+  # leak_sensitive_values: true
+
+  
+urls:
+  self:
+    issuer: http://:4444
+  consent: http://:3000/consent
+  login: http://:3000/login
+  logout: http://:3000/logout
+# urls:
+#   self:
+#     issuer: http://oidc.default.svc.cluster.local:4444
+#   consent: http://oidc.default.svc.cluster.local:3000/consent
+#   login: http://oidc.default.svc.cluster.local:3000/login
+#   logout: http://oidc.default.svc.cluster.local:3000/logout
+
+secrets:
+  system:
+    - youReallyNeedToChangeThis
+
+oidc:
+  subject_identifiers:
+    supported_types:
+      - pairwise
+      - public
+    pairwise:
+      salt: youReallyNeedToChangeThis

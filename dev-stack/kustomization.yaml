@@ -1,0 +1,113 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  # Admin Ui 
+  # - admin-ui/deployment.yaml
+  # - admin-ui/service.yaml
+  # Kratos
+  - kratos/deployment.yaml
+  - kratos/service-admin.yaml
+  - kratos/service-public.yaml
+  - kratos/sa.yaml
+  
+  # Oathkeeper
+  - oathkeeper/deployment-controller.yaml
+  - oathkeeper/service-api.yaml
+  - oathkeeper/service-proxy.yaml
+  - oathkeeper/ingress.yaml
+  
+  # Self-Serivce Ui 
+  - selfservice-ui/deployment.yaml
+  - selfservice-ui/service.yaml
+  
+    #SMTP
+  - fake-smtp-server/deployment.yaml
+  - fake-smtp-server/service-smtp.yaml
+  - fake-smtp-server/service-ui.yaml
+  - fake-smtp-server/service-admin.yaml
+  - fake-smtp-server/ingress.yaml
+
+  # Keto
+  - keto/deployment.yaml
+  - keto/service.yaml
+  - keto/sa.yaml
+  - keto/keto-job/job.yaml
+  
+  - postgresql/postgresql.yaml
+  # - dev_stack_shared_secrets.yaml
+  # - minio.yaml
+  # - oidc.yaml
+  - php.yaml
+
+configMapGenerator:
+  # Admin Ui 
+  - name: admin-ui-env
+    envs:
+      - admin-ui/config/admin-ui.env
+  - name: admin-ui-script
+    files:
+      - 20-rename.sh=admin-ui/config/rename.sh
+
+  # Hydra
+  - name: hydra-config
+    files:
+      - config/hydra.yaml
+
+  # Keto
+  - name: keto-config
+    files:
+      - keto.yaml=keto/config/keto.yaml
+
+  - name: keto-access-policy
+    files:
+      - access-policy.json=keto/keto-job/config/relation-tuples/admin-access.json
+      
+  # Kratos
+  - name: kratos-config
+    files:
+      - kratos.yaml=kratos/config/kratos.yaml
+  - name: kratos-identity
+    files:
+      - identity.schema.json=kratos/config/identity.schema.json
+
+  # Oathkeeper
+  - name: oathkeeper-rules
+    files:
+      - access-rules.yaml=oathkeeper/config/access-rules.yaml
+  - name: oathkeeper-config
+    files:
+      - config.yaml=oathkeeper/config/config.yaml 
+
+  # Self-Serivce Ui 
+  - name: selfservice-ui-env
+    envs:
+      - selfservice-ui/config/selfservice-ui.env
+
+  # SMTP
+  - name: mailslurper-config
+    files:
+      - config.json=fake-smtp-server/config/config.json
+
+
+secretGenerator:
+# Kratos
+  - name: kratos-secret
+    envs:
+      - kratos/secrets/kratos.env
+
+# Oathkeeper
+  - name: oathkeeper-jwk
+    files:
+      - mutator.id_token.jwks.json=oathkeeper/secrets/mutator.id_token.jwks.json
+
+# Keto
+  - name: keto-secret
+    envs:
+      - keto/secrets/keto.env
+# SMTP
+  - name: mailslurper-cert
+    files:
+      - mailslurper-cert.pem=fake-smtp-server/secrets/mailslurper-cert.pem
+      - mailslurper-key.pem=fake-smtp-server/secrets/mailslurper-key.pem
+

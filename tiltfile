@@ -1,0 +1,38 @@
+# Tiltfile
+NAMESPACE = "phpauth"
+OAUTH2_CALLBACK = "http://localhost:2746/oauth2/callback"
+OIDC_CLIENT_ID = "php"
+OIDC_CLIENT_SECRET = "!secret"
+
+# Deploy: tell Tilt what YAML to deploy
+# allow_k8s_contexts('kind-kind')
+# if k8s_context() == 'prod':
+#   fail("failing early to avoid overwriting prod")
+
+# Build: tell Tilt what images to build from which directories
+docker_build('php-auth', '.', dockerfile='Dockerfiles/Dockerfile.php-auth')
+# Install Kratos
+# load('ext://helm_remote', 'helm_remote')
+# helm_remote('kratos', 
+#             repo_url='https://k8s.ory.sh/helm/charts',
+#             values=["./k8s/helm/kratos/values.yaml"]
+#             )
+
+load('ext://namespace','namespace_create')
+namespace_create(NAMESPACE)
+k8s_yaml(kustomize("./dev-stack"))
+
+
+
+# k8s_resource('php', port_forwards=3000,  labels="php-auth-app")
+k8s_resource('test-kratos', port_forwards=[],  labels="ory.sh", resource_deps=["test-postgresql"])
+k8s_resource('test-oathkeeper', port_forwards=[],  labels="ory.sh")
+k8s_resource('test-keto', port_forwards=[],  labels="ory.sh",resource_deps=["test-postgresql"])
+k8s_resource('keto-add-policies',resource_deps=["test-keto"])
+k8s_resource('test-postgresql', port_forwards=[5432],  labels="ory.sh")
+k8s_resource('selfservice', port_forwards=[],  labels="ory.sh")
+# k8s_resource('admin-ui', port_forwards=[],  labels="ory.sh")
+k8s_resource('php-ui', port_forwards=['8080:80'],  labels="ory.sh")
+# k8s_resource('kratos', port_forwards=[4433,4455],  labels="kratos")
+# k8s_resource("oidc", port_forwards=[3000, 4444, 4445])
+# k8s_resource("minio", port_forwards=[9000,9090])
