@@ -1,3 +1,4 @@
+\c dcp;
 --
 -- PostgreSQL database dump
 --

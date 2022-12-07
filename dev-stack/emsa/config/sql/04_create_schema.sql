@@ -1,7 +1,7 @@
+\c dcp;
 -- Schema: elr
 
 -- DROP SCHEMA elr;
-
 CREATE SCHEMA elr
     AUTHORIZATION dcpadmin;
 

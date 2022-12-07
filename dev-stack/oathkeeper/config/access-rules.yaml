@@ -163,4 +163,4 @@
   errors:
     - handler: redirect
       config:
-        to: http://ory.test.info/emsa/elrapp/
+        to: http://ory.test.info/elrapp/

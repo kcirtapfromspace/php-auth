@@ -1,3 +1,4 @@
+\c dcp;
 -- Function: elr.clone_system_message_by_id(integer, integer)
 
 -- DROP FUNCTION elr.clone_system_message_by_id(integer, integer);
