@@ -1,18 +1,20 @@
 # FROM php:7.4-cli
-FROM php:8.1-apache
-RUN apt-get update && apt-get install -y \
-        libpq-dev \
-        && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-        && docker-php-ext-install pdo pdo_pgsql \
-        && touch /var/lib/elr_application.properties \
-        && mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/conf.d/php.ini \
-        # && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-        && echo 'ServerName localhost' >> /etc/apache2/sites-enabled/000-default.conf
+FROM php:8.1-fpm
+COPY ./dev-stack/emsa/src/elrapp/ /app/elrapp/
+COPY ./dev-stack/emsa/config/php/ /conf/
+RUN  apt-get update && apt-get install -y libpq-dev 
+RUN pecl install -f xdebug && docker-php-ext-enable xdebug
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql 
+RUN docker-php-ext-install pdo pdo_pgsql 
+RUN touch /var/lib/elr_application.properties 
+RUN touch  /usr/local/etc/php/conf.d/remote_debugging.ini 
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" 
+# RUN echo 'ServerName localhost' >> /etc/apache2/sites-enabled/000-default.conf 
+RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/conf.d/php.ini 
+RUN echo 'xdebug.mode = debug\nxdebug.start_with_request = yes' >> /usr/local/etc/php/conf.d/remote_debugging.ini
+RUN echo "<?php phpinfo(); ?>" >> /app/info.php
 
+# WORKDIR /var/www/html/
 
-COPY ./dev-stack/emsa/src/elrapp/ /var/www/html/elrapp/
-COPY ./dev-stack/emsa/config/php/ /opt/emsa/
-WORKDIR /var/www/html/
-
-EXPOSE 80
+# EXPOSE 80
 

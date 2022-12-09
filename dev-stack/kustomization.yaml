@@ -57,6 +57,11 @@ configMapGenerator:
     files:
       - 20-rename.sh=admin-ui/config/rename.sh
 
+  # EMSA
+  - name: nginx-config
+    files:
+      - nginx.conf=emsa/config/nginx.conf
+
   # Hydra
   - name: hydra-config
     files:
@@ -113,6 +118,7 @@ secretGenerator:
   - name: keto-secret
     envs:
       - keto/secrets/keto.env
+
 # SMTP
   - name: mailslurper-cert
     files:

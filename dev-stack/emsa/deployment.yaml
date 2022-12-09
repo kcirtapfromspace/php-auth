@@ -18,8 +18,44 @@ spec:
     strategy:
       type: Recreate
     spec:
+      volumes:
+        # Create the shared files volume to be used in both pods
+        - name: shared-files
+          emptyDir: {}
+        - name: php-config
+          emptyDir: {}
+        # Add the ConfigMap we declared above as a volume for the pod
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
       containers:
-        - env:
+        - image: nginx:latest
+          name: nginx
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/share/nginx/html
+            - name: php-config
+              mountPath: /opt/emsa/config.php
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+          ports:
+            - name: emsa-ui
+              containerPort: 8000
+              protocol: TCP
+
+        - image: emsa-ui
+          name: emsa-ui
+          volumeMounts:
+          - name: php-config
+            mountPath: /opt/emsa/config.php
+          - name: shared-files
+            mountPath: /usr/share/nginx/html
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /app/. /usr/share/nginx/html && cp -r /conf/. /opt/emsa/config.php"]
+          env:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
@@ -58,11 +94,12 @@ spec:
               value: '5432'
             - name: emsaDbSchemaPDO
               value: 'elr'
-          image: emsa-ui
-          name: emsa-ui
           imagePullPolicy: Always
           ports:
-            - name: emsa-ui
-              containerPort: 80
+            - name: php
+              containerPort: 9000
               protocol: TCP
+            # - name: xdebug
+            #   containerPort: 9003
+            #   protocol: TCP
       restartPolicy: Always
