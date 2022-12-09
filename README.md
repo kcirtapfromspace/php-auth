@@ -14,6 +14,9 @@ You need to install the following tools:
 | **[kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)**|Kubernetes native configuration management|
 | **[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**| The Kubernetes command-line tool|
 | **[tiltdev](https://docs.tilt.dev/install.html)**|A toolkit for fixing the pains of microservice development|
+Optional suggestions
+| **[dbeaver](https://dbeaver.io/)**|Free multi-platform database tool for developers, SQL programmers, database administrators and analysts.|
+| **[openlens](https://github.com/lensapp/lens)**|Lens is the free and open-source Kubernetes IDE|
 
 ```bash
 $ minikube start
