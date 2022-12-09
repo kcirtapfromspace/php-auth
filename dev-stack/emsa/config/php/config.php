@@ -89,8 +89,8 @@ define('EPITRAX_REST_SERVICE_URL', '/nedss/admin/rest/RestEJB/');
 define('EPITRAX_GEO_SERVICE_ENDPOINT', '/nedss/geo/find');
 
 define('EPITRAX_AUTH_HEADER', '1');  // install - set to header used to pass user ID for authentication
-define('EPITRAX_AUTH_ELR_UID', '');  // install - set to user ID corresponding to ELR user in EpiTrax
+define('EPITRAX_AUTH_ELR_UID', '1');  // install - set to user ID corresponding to ELR user in EpiTrax
 
-define('SMTP_HOST', 'smtphost');  // install - set SMTP host/IP
-define('SMTP_PORT', 25);  // install - change if needed
+define('SMTP_HOST', 'mail.test.info');  // install - set SMTP host/IP
+define('SMTP_PORT', 1025);  // install - change if needed
 define('SMTP_HELO', 'smtphelo.example.com');  // install - set SMTP HELO domain

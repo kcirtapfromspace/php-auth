@@ -21,7 +21,7 @@ k8s_yaml(kustomize("./dev-stack"))
 
 # EMSA
 k8s_resource('emsa-ui', port_forwards='8000:80',  labels="emsa", resource_deps=["emsa-db"])
-k8s_resource('emsa-db', port_forwards=[], labels="emsa")
+k8s_resource('emsa-db', port_forwards=[5432], labels="emsa")
 
 #ORY Auth
 k8s_resource('test-kratos', port_forwards=[],  labels="ory.sh", resource_deps=["test-postgresql"])
