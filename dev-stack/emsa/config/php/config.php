@@ -76,7 +76,7 @@ $emsaDbPass = 'droolspass';  // install - set a unique password for $my_db_usern
 $emsaDbSchemaPrefix = 'elr.';
 $emsaDbSchemaPDO = 'elr';
 
-// $replicationDbHost = 'emsa-db.emsa.svc.cluster.local';  // install - set to host/IP address of your database replication server for the EMSA database
+// $replicationDbHost = 'emsa-db.default.svc.cluster.local';  // install - set to host/IP address of your database replication server for the EMSA database
 // $replicationDbPort = '5433';
 
 define('MIRTH_PATH', 'http://mirthhost:mirthport/services/Mirth?wsdl');  // install - set host/port for Mirth Connect service

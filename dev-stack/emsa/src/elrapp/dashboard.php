@@ -1,5 +1,4 @@
 <?php
-include_once 'includes/dashboard_functions.php';
 /**
  * Copyright (c) 2016 Utah Department of Technology Services and Utah Department of Health
  * 

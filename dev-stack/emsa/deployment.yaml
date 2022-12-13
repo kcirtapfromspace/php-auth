@@ -10,13 +10,13 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: emsa-ui
+    strategy:
+      type: Recreate
   template:
     annotations:
     metadata:
       labels:
         app.kubernetes.io/name: emsa-ui
-    strategy:
-      type: Recreate
     spec:
       containers:
         - env:
